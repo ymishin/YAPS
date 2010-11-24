@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yaps_sim", "yaps_sim\yaps_sim.vcproj", "{85350A65-A734-4277-B62D-850E8D9EADFD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yaps_post", "yaps_post\yaps_post.vcproj", "{3E0837A1-C8FC-4C9C-86E5-CF7363EA4FEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85350A65-A734-4277-B62D-850E8D9EADFD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{85350A65-A734-4277-B62D-850E8D9EADFD}.Debug|Win32.Build.0 = Debug|Win32
+		{85350A65-A734-4277-B62D-850E8D9EADFD}.Release|Win32.ActiveCfg = Release|Win32
+		{85350A65-A734-4277-B62D-850E8D9EADFD}.Release|Win32.Build.0 = Release|Win32
+		{3E0837A1-C8FC-4C9C-86E5-CF7363EA4FEF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3E0837A1-C8FC-4C9C-86E5-CF7363EA4FEF}.Debug|Win32.Build.0 = Debug|Win32
+		{3E0837A1-C8FC-4C9C-86E5-CF7363EA4FEF}.Release|Win32.ActiveCfg = Release|Win32
+		{3E0837A1-C8FC-4C9C-86E5-CF7363EA4FEF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
