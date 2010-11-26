@@ -63,9 +63,9 @@ void
 Calc::run()
 {
     int nfile = 1;
-    time_t t1, t2;
 
 #ifdef YAPS_TIME
+    time_t t1, t2;
     time( &t1);
 #endif
 

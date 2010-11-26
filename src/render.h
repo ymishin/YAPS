@@ -10,7 +10,7 @@ class Render
 {
 
 public:
-    
+
     // constructor
     Render( int argc, char **argv);
     // run renderer
@@ -19,7 +19,7 @@ public:
 private:
 
     // RGB colors for rendering
-    static const float particleColor[];
+    static const float particleColor[][3];
     static const float backgroundColor[];
     static const float segmentColor[];
     static const float triangleLineColor[];
@@ -32,6 +32,19 @@ private:
     // current file
     static int nfile;
 
+    // scaling/rotation steps
+    static const float scaleStep;
+    static const float xRotateStep;
+    static const float yRotateStep;
+    static const float xyRotateMult;
+    // current scaling/rotation factors
+    static float scaleFactor;
+    static float xRotateFactor;
+    static float yRotateFactor;
+    // current mouse button and position
+    static int x0, y0;
+    static int curButton;
+
     // initialize display list(s)
     static void initDisplayLists();
     // initialize GL capabilities
@@ -41,6 +54,9 @@ private:
     static void reshapeCallback( int width, int height);
     static void keyboardCallback( unsigned char key, int x, int y);
     static void specialFuncCallback( int key, int x, int y);
+    static void mouseFuncCallback( int button, int state, int x, int y);
+    static void mouseMotionCallback( int x, int y);
+    static void scaleRotateFunc();
 
 };
 

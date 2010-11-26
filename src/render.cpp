@@ -14,7 +14,8 @@ using namespace std;
 
 // RGB colors for rendering
 // smoothing particles
-const float Render::particleColor[3]     = { 0.0f, 0.4f, 0.6f };
+const float Render::particleColor[2][3]  = { { 0.0f, 0.4f, 0.6f },
+                                             { 0.0f, 0.2f, 0.4f } };
 // background
 const float Render::backgroundColor[3]   = { 0.7f, 0.7f, 0.7f };
 // segments
@@ -22,7 +23,7 @@ const float Render::segmentColor[3]      = { 0.0f, 0.0f, 0.0f };
 // triangles' edges
 const float Render::triangleLineColor[3] = { 0.0f, 0.0f, 0.0f };
 // triangles' interiors
-const float Render::triangleFillColor[4] = { 0.6f, 0.6f, 0.6f, 0.8f };
+const float Render::triangleFillColor[4] = { 0.6f, 0.6f, 0.6f, 0.7f };
 
 // display list(s) numbers
 const int Render::obstacles_list = 1;
@@ -59,6 +60,8 @@ Render::Render( int argc, char **argv)
     glutReshapeFunc( reshapeCallback);
     glutKeyboardFunc( keyboardCallback);
     glutSpecialFunc( specialFuncCallback);
+    glutMouseFunc( mouseFuncCallback);
+    glutMotionFunc( mouseMotionCallback);
 } // Render
 
 // Run renderer.
@@ -168,7 +171,7 @@ Render::displayCallback()
         glTranslatef( particles[i].pos[0], 
                       particles[i].pos[1], 
                       particles[i].pos[2]);
-        glColor3fv( particleColor);
+        glColor3fv( particleColor[particles[i].no-1]);
         glutSolidSphere( parameters.particlesRadius, 20, 20);
         glPopMatrix();
     }
@@ -242,45 +245,113 @@ Render::keyboardCallback( unsigned char key,   // key's code
     return;
 } // keyboardCallback
 
+// scaling/rotation steps
+const float Render::scaleStep    = 0.05f;
+const float Render::xRotateStep  = 1.0f;
+const float Render::yRotateStep  = 1.0f;
+const float Render::xyRotateMult = 0.1f;
+// current scaling/rotation factors
+float Render::scaleFactor   = 1.0f;
+float Render::xRotateFactor = 0.0f;
+float Render::yRotateFactor = 0.0f;
+
 // GLUT special functions callback.
 void
 Render::specialFuncCallback( int key,   // key's code
                              int x,     // position of
                              int y)     // the mouse
 {
-    // scaling/rotation steps
-    static float scaleStep   = 0.1f;
-    static float xRotateStep = 1.0f;
-    static float yRotateStep = 1.0f;
-
-    // current scaling/rotation factors
-    static float scaleFactor   = 1.0f;
-    static float xRotateFactor = 0.0f;
-    static float yRotateFactor = 0.0f;
 
     switch (key) {
       case GLUT_KEY_UP:
-        xRotateFactor += xRotateStep;
-        break;
+          xRotateFactor += xRotateStep;
+          break;
       case GLUT_KEY_DOWN:
-        xRotateFactor -= xRotateStep;
-        break;
+          xRotateFactor -= xRotateStep;
+          break;
       case GLUT_KEY_LEFT:
-        yRotateFactor += yRotateStep;
-        break;
+          yRotateFactor += yRotateStep;
+          break;
       case GLUT_KEY_RIGHT:
-        yRotateFactor -= yRotateStep;
-        break;
+          yRotateFactor -= yRotateStep;
+          break;
       case GLUT_KEY_PAGE_UP:
-        scaleFactor += scaleStep;
-        break;
+          scaleFactor += scaleStep;
+          break;
       case GLUT_KEY_PAGE_DOWN:
-        scaleFactor -= scaleStep;
-        break;
+          scaleFactor -= scaleStep;
+          break;
       default:
-        break;
+          return;
+          break;
     }
-    
+
+    scaleRotateFunc();
+
+    return;
+} // specialFuncCallback
+
+// current mouse button and position
+int Render::x0 = -1;
+int Render::y0 = -1;
+int Render::curButton = -1;
+
+// GLUT mouse button callback.
+void
+Render::mouseFuncCallback( int button, int state, int x, int y)
+{
+
+    // save pressed button and position
+    curButton = button;
+    x0 = x;
+    y0 = y;
+
+    // scaling
+    switch (curButton) {
+      case 3:
+          scaleFactor += scaleStep;
+          break;
+      case 4:
+          scaleFactor -= scaleStep;
+          break;
+      default:
+          return;
+          break;
+    }
+
+    // redraw
+    scaleRotateFunc();
+
+    return;
+} // mouseFuncCallback
+
+// GLUT mouse motion callback.
+void
+Render::mouseMotionCallback( int x, int y)
+{
+    // rotation
+    switch (curButton) {
+      case GLUT_LEFT_BUTTON:
+          yRotateFactor -= xyRotateMult * (x0 - x);
+          xRotateFactor -= xyRotateMult * (y0 - y);
+          x0 = x;
+          y0 = y;
+          break;
+      default:
+          return;
+          break;
+    }
+     
+    // redraw
+    scaleRotateFunc();
+
+    return;
+} // mouseMotionCallback
+
+// Rotate and scale and redraw.
+void
+Render::scaleRotateFunc()
+{
     glLoadIdentity();
 
     float clipVolume = parameters.clipVolume;
@@ -302,4 +373,4 @@ Render::specialFuncCallback( int key,   // key's code
     glutPostRedisplay();
 
     return;
-} // specialFuncCallback
+} // scaleRotateFunc
