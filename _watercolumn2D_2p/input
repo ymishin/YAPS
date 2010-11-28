@@ -1,0 +1,27 @@
+$PARAMS
+DIM            2
+PRTS_DISTR     5.0
+BPRTS_DISTR    2.5
+PRADIUS        5.0
+SOS            25
+KERNEL         SPLINE
+SMOOTH_LEN     18.0
+EOS            DESBRUN
+VISC_ALPHA     0.05
+VISC_BETA      0.0
+TIME_STEP      0.05
+NSTEPS         43201
+OUT_FREQ       120
+CLIP_VOL       680.0
+$END
+
+$CLOUDS
+1  0.001   55.0 55.0  150.0 0.0  0.0 350.0  0.0 0.0
+2  0.003  475.0 55.0  150.0 0.0  0.0 350.0  0.0 0.0
+$END
+
+$OBSTACLES
+3   50.0 630.0    50.0  50.0
+3   50.0  50.0   630.0  50.0
+3  630.0  50.0   630.0 630.0
+$END

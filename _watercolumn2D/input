@@ -1,8 +1,8 @@
 $PARAMS
 DIM            2
-PRTS_DISTR     10.0
-BPRTS_DISTR    5.0
-PRADIUS        3.5
+PRTS_DISTR     5.0
+BPRTS_DISTR    2.5
+PRADIUS        5.0
 SOS            25
 KERNEL         SPLINE
 SMOOTH_LEN     18.0
@@ -10,7 +10,7 @@ EOS            DESBRUN
 VISC_ALPHA     0.01
 VISC_BETA      0.0
 TIME_STEP      0.1
-NSTEPS         6001
+NSTEPS         9001
 OUT_FREQ       60
 CLIP_VOL       680.0
 $END

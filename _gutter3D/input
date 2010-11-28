@@ -1,8 +1,8 @@
 $PARAMS
 DIM            3
-PRTS_DISTR     10.0
-BPRTS_DISTR    5.0
-PRADIUS        3.5
+PRTS_DISTR     5.0
+BPRTS_DISTR    2.5
+PRADIUS        3.0
 SOS            20
 KERNEL         SPLINE
 SMOOTH_LEN     16.0
