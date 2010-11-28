@@ -10,7 +10,7 @@ EOS            DESBRUN
 VISC_ALPHA     0.05
 VISC_BETA      0.0
 TIME_STEP      0.2
-NSTEPS         5001
+NSTEPS         10001
 OUT_FREQ       50
 CLIP_VOL       500.0
 $END
