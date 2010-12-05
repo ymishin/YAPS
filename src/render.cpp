@@ -222,7 +222,8 @@ Render::keyboardCallback( unsigned char key,   // key's code
               nfile++;
               sprintf( title, "%s - %05d", "YAPS", nfile);
               glutSetWindowTitle( title);
-              glutPostRedisplay();
+              //glutPostRedisplay();
+              displayCallback();
           }
           break;
       case 'p':
@@ -232,7 +233,8 @@ Render::keyboardCallback( unsigned char key,   // key's code
               nfile--;
               sprintf( title, "%s - %05d", "YAPS", nfile);
               glutSetWindowTitle( title);
-              glutPostRedisplay();
+              //glutPostRedisplay();
+              displayCallback();
           }
           break;
       case 'q':
